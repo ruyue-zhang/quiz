@@ -55,7 +55,7 @@ class Add extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="exampleFormControlInput1">*价格：</label>
-            <input type="text" 
+            <input type="number" 
                    className="form-control" 
                    id="exampleFormControlInput1" 
                    placeholder="价格" 

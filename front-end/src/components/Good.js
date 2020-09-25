@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../style/Home.css';
+import '../style/Good.css';
 import apple from '../apple.jpg';
 
-class Home extends Component {
+class Good extends Component {
   state = {
     name: "苹果",
     price: 2,
@@ -24,4 +24,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Good;
