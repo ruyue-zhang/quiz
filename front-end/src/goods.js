@@ -1,8 +1,8 @@
 class Goods {
-  constructor(name, price, unit, img) {
+  constructor(name, price, unitOfMeasurement, img) {
     this.name = name;
     this.price = price;
-    this.unit = unit;
+    this.unitOfMeasurement = unitOfMeasurement;
     this.img = img;
   }
 }

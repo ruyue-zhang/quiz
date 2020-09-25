@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import '../style/Add.css';
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css';
+// import Goods from '../goods';
 
 class Add extends Component {
   state = {
     name: "",
-    price: "",
-    unit: "",
+    price: 0,
+    unitOfMeasurement: "",
     img: "",
   }
 
@@ -18,19 +19,30 @@ class Add extends Component {
 
   hadleForSubmit = (event) => {
     event.preventDefault();
-    console.log(
-      "name:", this.state.name, 
-      "gender:", this.state.gender, 
-      "description:", this.state.description,
-      "checked:", this.state.checked
-    );
+    const goodsJson = {
+      "name": this.state.name,
+      "price": this.state.name,
+      "unitOfMeasurement": this.state.unitOfMeasurement,
+      "img": this.state.img,
+
+    }
+    fetch("http://localhost:8080/goods", {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(goodsJson)
+    }).then(function(response) {
+      console.log(response);
+    });
   }
 
   render() {
     return (
       <div className="container">
         <h5>添加商品</h5>
-        <form action="">
+        <form onSubmit={this.hadleForSubmit}>
           <div className="form-group">
             <label htmlFor="exampleFormControlInput1"> *名称：</label>
             <input type="text" 
@@ -57,8 +69,8 @@ class Add extends Component {
                    className="form-control" 
                    id="exampleFormControlInput1" 
                    placeholder="单位" 
-                   value={this.state.unit}
-                   onChange={(event) => this.handleInputChange("unit", event)}
+                   value={this.state.unitOfMeasurement}
+                   onChange={(event) => this.handleInputChange("unitOfMeasurement", event)}
             />
           </div>
           <div className="form-group">
@@ -72,7 +84,7 @@ class Add extends Component {
             />
           </div>
           <input type="submit" value="Submit" className="btn btn-primary" 
-            disabled={!this.state.name || !this.state.price || !this.state.unit || !this.state.img}/>
+            disabled={!this.state.name || !this.state.price || !this.state.unitOfMeasurement || !this.state.img}/>
         </form>
       </div>
     );
