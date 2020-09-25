@@ -3,12 +3,15 @@ package com.twuc.shopping.controller;
 import com.twuc.shopping.dto.GoodsDto;
 import com.twuc.shopping.entity.GoodsEntity;
 import com.twuc.shopping.service.GoodsService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class GoodsController {
@@ -29,5 +32,17 @@ public class GoodsController {
         goodsService.addGoods(goodsEntity);
         return ResponseEntity.created(null)
                 .build();
+    }
+
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping("/goods")
+    public List<GoodsDto> getAllGoods() {
+        return goodsService.getAllGoods().stream().map(goodsEntity -> GoodsDto.builder()
+                .name(goodsEntity.getName())
+                .price(goodsEntity.getPrice())
+                .unitOfMeasurement(goodsEntity.getUnitOfMeasurement())
+                .img(goodsEntity.getImg())
+                .build()
+        ).collect(Collectors.toList());
     }
 }

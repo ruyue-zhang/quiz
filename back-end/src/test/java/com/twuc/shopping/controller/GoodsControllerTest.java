@@ -14,8 +14,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -115,5 +119,35 @@ class GoodsControllerTest {
         assertEquals(1, goodsEntities.get(0).getPrice());
         assertEquals("瓶", goodsEntities.get(0).getUnitOfMeasurement());
         assertEquals("1111", goodsEntities.get(0).getImg());
+    }
+
+    @Test
+    void should_get_all_goods() throws Exception {
+        GoodsEntity goodsEntity1 = GoodsEntity.builder()
+                .name("苹果")
+                .price(1)
+                .unitOfMeasurement("斤")
+                .img("1111")
+                .build();
+        GoodsEntity goodsEntity2 = GoodsEntity.builder()
+                .name("可乐")
+                .price(2)
+                .unitOfMeasurement("瓶")
+                .img("2222")
+                .build();
+        goodsRepository.save(goodsEntity1);
+        goodsRepository.save(goodsEntity2);
+
+        mockMvc.perform(get("/goods"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name", is("苹果")))
+                .andExpect(jsonPath("$[0].price", is(1)))
+                .andExpect(jsonPath("$[0].unitOfMeasurement", is("斤")))
+                .andExpect(jsonPath("$[0].img", is("1111")))
+                .andExpect(jsonPath("$[1].name", is("可乐")))
+                .andExpect(jsonPath("$[1].price", is(2)))
+                .andExpect(jsonPath("$[1].unitOfMeasurement", is("瓶")))
+                .andExpect(jsonPath("$[1].img", is("2222")));
+
     }
 }
