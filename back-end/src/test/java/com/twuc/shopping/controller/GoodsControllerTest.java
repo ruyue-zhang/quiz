@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twuc.shopping.dto.GoodsDto;
 import com.twuc.shopping.entity.GoodsEntity;
 import com.twuc.shopping.repository.GoodsRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -12,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
@@ -31,6 +33,11 @@ class GoodsControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private GoodsRepository goodsRepository;
+
+    @BeforeEach
+    void setUp() {
+        goodsRepository.deleteAll();;
+    }
 
     @Test
     void should_not_add_when_name_is_empty() throws Exception {
@@ -119,6 +126,31 @@ class GoodsControllerTest {
         assertEquals(1, goodsEntities.get(0).getPrice());
         assertEquals("瓶", goodsEntities.get(0).getUnitOfMeasurement());
         assertEquals("1111", goodsEntities.get(0).getImg());
+    }
+
+    @Test
+    void should_not_add_when_name_is_exist() throws Exception {
+        GoodsEntity goodsEntity = GoodsEntity.builder()
+                .name("可乐")
+                .price(2)
+                .unitOfMeasurement("瓶")
+                .img("2222")
+                .build();
+        goodsRepository.save(goodsEntity);
+
+        GoodsDto goodsDto = GoodsDto.builder()
+                .name("可乐")
+                .price(1)
+                .unitOfMeasurement("瓶")
+                .img("1111")
+                .build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String goodsJson = objectMapper.writeValueAsString(goodsDto);
+
+        mockMvc.perform(post("/goods")
+                .content(goodsJson)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
