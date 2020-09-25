@@ -72,4 +72,20 @@ class GoodsControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void should_not_add_when_img_is_empty() throws Exception {
+        GoodsDto goodsDto = GoodsDto.builder()
+                .name("苹果")
+                .price(1)
+                .unitOfMeasurement("瓶")
+                .build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String goodsJson = objectMapper.writeValueAsString(goodsDto);
+
+        mockMvc.perform(post("/goods")
+                .content(goodsJson)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
 }
