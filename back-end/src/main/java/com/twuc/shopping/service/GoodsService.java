@@ -19,6 +19,10 @@ public class GoodsService {
         goodsRepository.save(goodsEntity);
     }
 
+    public List<GoodsEntity> findAllByName(String name) {
+        return goodsRepository.findAllByName(name);
+    }
+
     public List<GoodsEntity> getAllGoods() {
         return goodsRepository.findAll();
     }

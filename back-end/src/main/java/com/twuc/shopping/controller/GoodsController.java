@@ -23,6 +23,11 @@ public class GoodsController {
 
     @PostMapping("/goods")
     public ResponseEntity addGoods(@RequestBody @Valid GoodsDto goodsDto) {
+        List<GoodsEntity> goodsList = goodsService.findAllByName(goodsDto.getName());
+        if(goodsList.size() != 0) {
+            return ResponseEntity.badRequest()
+                    .build();
+        }
         GoodsEntity goodsEntity = GoodsEntity.builder()
                 .name(goodsDto.getName())
                 .price(goodsDto.getPrice())
