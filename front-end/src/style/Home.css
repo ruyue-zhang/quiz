@@ -1,0 +1,26 @@
+.phone {
+  width: 150px;
+  margin: 20px;
+}
+
+.phone .name {
+  font-weight: 700;
+}
+.phone img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin-top: 10px;
+}
+
+.buy {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.buy button{
+  background-color: gray;
+  border: none;
+  border-radius: 50%;
+}
