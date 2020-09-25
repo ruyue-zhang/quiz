@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Header from './components/header/Header';
+import Header from './components/Header';
+import Add from './components/Add';
 
 class App extends Component {
   render() {
     return (
       <div className="app">
         <Router>
-          <Header />
+        <Header />
           <Switch>
-            {/* <Route exact path='/add' component={Header} /> */}
+            <Route exact path='/add' component={Add} />
           </Switch>
         </Router>
       </div>
