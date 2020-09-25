@@ -1,0 +1,16 @@
+.header {
+  height: 50px;
+  background-color: black;
+  vertical-align: middle;
+}
+
+a.nav_item {
+  margin: 0 30px;
+  color: white;
+  line-height: 50px;
+  text-decoration: none;
+}
+
+a.nav_active {
+  text-decoration: underline;
+}
