@@ -2,6 +2,7 @@ package com.twuc.shopping.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twuc.shopping.dto.GoodsDto;
+import com.twuc.shopping.entity.GoodsEntity;
 import com.twuc.shopping.repository.GoodsRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -87,5 +91,29 @@ class GoodsControllerTest {
                 .content(goodsJson)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_add_when_input_is_correct() throws Exception {
+        GoodsDto goodsDto = GoodsDto.builder()
+                .name("苹果")
+                .price(1)
+                .unitOfMeasurement("瓶")
+                .img("1111")
+                .build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String goodsJson = objectMapper.writeValueAsString(goodsDto);
+
+        mockMvc.perform(post("/goods")
+                .content(goodsJson)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        List<GoodsEntity> goodsEntities = goodsRepository.findAll();
+        assertEquals(1, goodsEntities.size());
+        assertEquals("苹果", goodsEntities.get(0).getName());
+        assertEquals(1, goodsEntities.get(0).getPrice());
+        assertEquals("瓶", goodsEntities.get(0).getUnitOfMeasurement());
+        assertEquals("1111", goodsEntities.get(0).getImg());
     }
 }
