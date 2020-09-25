@@ -41,4 +41,20 @@ class GoodsControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    void should_not_add_when_price_is_empty() throws Exception {
+        GoodsDto goodsDto = GoodsDto.builder()
+                .name("苹果")
+                .unitOfMeasurement("个")
+                .img("11111")
+                .build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String goodsJson = objectMapper.writeValueAsString(goodsDto);
+
+        mockMvc.perform(post("/goods")
+                .content(goodsJson)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
 }

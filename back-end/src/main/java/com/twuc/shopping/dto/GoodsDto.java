@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -12,12 +13,12 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsDto {
-    @NotNull
+    @NotEmpty
     private String name;
     @NotNull
     private int price;
-    @NotNull
+    @NotEmpty
     private String unitOfMeasurement;
-    @NotNull
+    @NotEmpty
     private String img;
 }
