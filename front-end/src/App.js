@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Header from './components/Header';
 import Add from './components/Add';
-import Good from './components/Good';
+import Goods from './components/Goods';
 
 class App extends Component {
   render() {
@@ -12,7 +12,7 @@ class App extends Component {
         <Header />
           <Switch>
             <Route exact path='/add' component={Add} />
-            <Route exact path='/' component={Good} />
+            <Route exact path='/' component={Goods} />
           </Switch>
         </Router>
       </div>

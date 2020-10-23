@@ -1,16 +1,28 @@
 .card {
-  width: 300px;
+  position: relative;
+  width: 230px;
 }
 
 .card-body {
   margin-left: 15px;
 }
 
+.card-img-top {
+  height: 200px;
+}
+
 button{
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
   width: 30px;
-  margin: 0 0 15px 250px;
   background-color: white;
   border: 1px gray solid;
   font-size: 15px;
   border-radius: 50%;
 }
+
+.mb-4 {
+  flex: 0 0 25%;
+}
+

@@ -21,7 +21,7 @@ class Add extends Component {
     event.preventDefault();
     const goodsJson = {
       "name": this.state.name,
-      "price": this.state.name,
+      "price": this.state.price,
       "unitOfMeasurement": this.state.unitOfMeasurement,
       "img": this.state.img,
 
