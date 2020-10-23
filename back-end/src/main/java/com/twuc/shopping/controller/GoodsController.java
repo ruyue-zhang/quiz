@@ -43,6 +43,7 @@ public class GoodsController {
     @GetMapping("/goods")
     public List<GoodsDto> getAllGoods() {
         return goodsService.getAllGoods().stream().map(goodsEntity -> GoodsDto.builder()
+                .id(goodsEntity.getId())
                 .name(goodsEntity.getName())
                 .price(goodsEntity.getPrice())
                 .unitOfMeasurement(goodsEntity.getUnitOfMeasurement())

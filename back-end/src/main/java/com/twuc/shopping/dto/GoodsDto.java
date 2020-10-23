@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsDto {
+    private Integer id;
     @NotEmpty
     private String name;
     @NotNull
