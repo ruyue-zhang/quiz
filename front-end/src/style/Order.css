@@ -1,0 +1,26 @@
+thead tr {
+  font-weight: bold;
+}
+
+.orderList td {
+  width: 200px;
+  text-align: center;
+}
+
+.orderList tr {
+  line-height: 50px;
+  border-bottom: 1px lightgray solid;
+}
+
+.orderList td button {
+  line-height: 40px;
+  width: 80px;
+  height: 40px;
+  vertical-align: middle;
+  border: 1px rgb(238, 237, 237) soild;
+  border-radius: 15%;
+  outline: none;
+  color: rgb(206, 53, 53);
+  background-color: white;
+}
+

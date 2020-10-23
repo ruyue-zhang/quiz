@@ -1,17 +1,4 @@
-.card {
-  position: relative;
-  width: 230px;
-}
-
-.card-body {
-  margin-left: 15px;
-}
-
-.card-img-top {
-  height: 200px;
-}
-
-button{
+.card button{
   position: absolute;
   right: 15px;
   bottom: 15px;
@@ -20,6 +7,10 @@ button{
   border: 1px gray solid;
   font-size: 15px;
   border-radius: 50%;
+}
+
+.card-img-top {
+  height: 200px;
 }
 
 .mb-4 {
