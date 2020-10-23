@@ -1,25 +1,16 @@
-.goods {
-  width: 200px;
-  margin: 20px;
+.card {
+  width: 300px;
 }
 
-.goods .name {
-  font-weight: 700;
-}
-.goods img {
-  display: block;
-  width: 200px;
-  margin-top: 10px;
-}
-
-.buy {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
+.card-body {
+  margin-left: 15px;
 }
 
 button{
-  background-color: gray;
-  border: none;
+  width: 30px;
+  margin: 0 0 15px 250px;
+  background-color: white;
+  border: 1px gray solid;
+  font-size: 15px;
   border-radius: 50%;
 }
